@@ -1,14 +1,9 @@
+
 cat <<EOF > .gitignore
-# Java Compilation Artifacts
 *.class
 *.jar
-*.war
-*.ear
-bin/
 build/
 out/
-
-# IDE Specific Configurations
 .idea/
 *.iml
 .classpath
