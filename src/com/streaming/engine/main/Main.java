@@ -1,5 +1,6 @@
 package com.streaming.engine.main;
 
+import com.streaming.engine.playback.PlaybackEngine;
 import com.streaming.engine.playlist.Playlist;
 import com.streaming.engine.playlist.Song;
 
@@ -16,6 +17,37 @@ public class Main {
         for (Song track : mix.getTracks()) {
             System.out.println(" -> Stream Buffer Target: " + track.getTitle() + " by " + track.getArtist());
         }
+        System.out.println("=== Day 2: Playback State Machine Verification ===\n");
+
+        // 1. Prepare sample tracks
+        Song track = new Song(101, "Paisa Pulse Beats", "Siddhant", 180);
+
+        // 2. Initialize the engine
+        PlaybackEngine engine = new PlaybackEngine();
+        System.out.println("Initial State: " + engine.getCurrentStateName());
+
+        // 3. Fire actions to test state transitions
+        System.out.println("\n--- Action: Try to pause while stopped ---");
+        engine.pause();
+
+        System.out.println("\n--- Action: Play Track ---");
+        engine.play(track);
+        System.out.println("Current State: " + engine.getCurrentStateName());
+
+        System.out.println("\n--- Action: Play Same Track Again ---");
+        engine.play(track);
+
+        System.out.println("\n--- Action: Pause Track ---");
+        engine.pause();
+        System.out.println("Current State: " + engine.getCurrentStateName());
+
+        System.out.println("\n--- Action: Resume Track ---");
+        engine.play(track);
+        System.out.println("Current State: " + engine.getCurrentStateName());
+
+        System.out.println("\n--- Action: Stop Track ---");
+        engine.stop();
+        System.out.println("Current State: " + engine.getCurrentStateName());
 
 
     }
