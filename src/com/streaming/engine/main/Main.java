@@ -1,8 +1,11 @@
 package com.streaming.engine.main;
-
+import java.util.*;
 import com.streaming.engine.playback.PlaybackEngine;
 import com.streaming.engine.playlist.Playlist;
 import com.streaming.engine.playlist.Song;
+import com.streaming.engine.recommendation.GenreBasedStrategy;
+import com.streaming.engine.recommendation.RecommendationEngine;
+import com.streaming.engine.recommendation.TopChartsStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -48,6 +51,12 @@ public class Main {
         System.out.println("\n--- Action: Stop Track ---");
         engine.stop();
         System.out.println("Current State: " + engine.getCurrentStateName());
+        int userId=107;
+        RecommendationEngine engine1 = new RecommendationEngine(new TopChartsStrategy());
+        List<Song> recommendation = engine1.generatePlaylist(userId);
+        
+        engine1.setStrategy(new GenreBasedStrategy());
+        engine1.generatePlaylist(userId);
 
 
     }
