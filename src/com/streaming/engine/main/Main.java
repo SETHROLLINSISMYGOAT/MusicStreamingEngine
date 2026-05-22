@@ -1,5 +1,10 @@
 package com.streaming.engine.main;
 import java.util.*;
+
+import com.streaming.engine.notification.AnalyticsTrackerService;
+import com.streaming.engine.notification.AudioEngineObserver;
+import com.streaming.engine.notification.PushNotificationService;
+import com.streaming.engine.notification.UploadManager;
 import com.streaming.engine.playback.PlaybackEngine;
 import com.streaming.engine.playlist.Playlist;
 import com.streaming.engine.playlist.Song;
@@ -57,6 +62,21 @@ public class Main {
         
         engine1.setStrategy(new GenreBasedStrategy());
         engine1.generatePlaylist(userId);
+
+        // Day 4
+        UploadManager uploadManager = new UploadManager();
+        AudioEngineObserver push = new PushNotificationService();
+        AnalyticsTrackerService analytics = new AnalyticsTrackerService();
+        uploadManager.attach(push);
+        uploadManager.attach(analytics);
+        Song newTrack = new Song(601, "Unaddictd Anthems", "Siddhant", 195);
+        uploadManager.releasedSong((newTrack));
+        uploadManager.detach((analytics));
+        Song secondTrack = new Song(602, "Coding Sprints", "Tech Team", 220);
+        uploadManager.releasedSong(secondTrack);
+        
+
+
 
 
     }
