@@ -1,7 +1,9 @@
 package com.streaming.engine.main;
 import java.util.*;
 import com.streaming.engine.playlist1.Playlist1;
-
+import com.streaming.engine.adapter.LegacySoundCloudService;
+import com.streaming.engine.adapter.NativeAudioPlayer;
+import com.streaming.engine.adapter.SoundCloudAdapter;
 import com.streaming.engine.notification.AnalyticsTrackerService;
 import com.streaming.engine.notification.AudioEngineObserver;
 import com.streaming.engine.notification.PushNotificationService;
@@ -91,6 +93,18 @@ public class Main {
         System.out.println("\n--- Scenario 2: Premium Tier Upgrade Event ---");
         Playlist1 premiumPlaylist = PlaylistFactory.createPlaylist("PREMIUM");
         premiumPlaylist.addSong(track2Song);
+
+  
+       Song nativeTrack = new Song(801, "Interview Success Jam", "Siddhant", 200);
+
+        
+        LegacySoundCloudService soundCloudService = new LegacySoundCloudService();
+
+        NativeAudioPlayer player = new SoundCloudAdapter(soundCloudService);
+
+      
+        System.out.println("--- Client issues standard playback command ---");
+        player.playNativeTrack(nativeTrack);
         
 
 
