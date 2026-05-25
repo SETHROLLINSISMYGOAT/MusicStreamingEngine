@@ -1,5 +1,6 @@
 package com.streaming.engine.main;
 import java.util.*;
+import com.streaming.engine.playlist1.Playlist1;
 
 import com.streaming.engine.notification.AnalyticsTrackerService;
 import com.streaming.engine.notification.AudioEngineObserver;
@@ -8,6 +9,7 @@ import com.streaming.engine.notification.UploadManager;
 import com.streaming.engine.playback.PlaybackEngine;
 import com.streaming.engine.playlist.Playlist;
 import com.streaming.engine.playlist.Song;
+import com.streaming.engine.playlist1.PlaylistFactory;
 import com.streaming.engine.recommendation.GenreBasedStrategy;
 import com.streaming.engine.recommendation.RecommendationEngine;
 import com.streaming.engine.recommendation.TopChartsStrategy;
@@ -74,6 +76,21 @@ public class Main {
         uploadManager.detach((analytics));
         Song secondTrack = new Song(602, "Coding Sprints", "Tech Team", 220);
         uploadManager.releasedSong(secondTrack);
+
+        // day 5
+        System.out.println("=== Day 5: Factory Method Pattern Verification ===\n");
+
+        Song track2Song = new Song(701, "Code Alchemy", "Siddhant", 185);
+
+        // 1. Request a Free Playlist from the factory
+        System.out.println("--- Scenario 1: Free Tier Session Detected ---");
+        Playlist1 userPlaylist = PlaylistFactory.createPlaylist("FREE");
+        userPlaylist.addSong(track2Song);
+        
+        // 2. Request a Premium Playlist from the factory
+        System.out.println("\n--- Scenario 2: Premium Tier Upgrade Event ---");
+        Playlist1 premiumPlaylist = PlaylistFactory.createPlaylist("PREMIUM");
+        premiumPlaylist.addSong(track2Song);
         
 
 
