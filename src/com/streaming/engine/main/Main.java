@@ -8,6 +8,10 @@ import com.streaming.engine.notification.AnalyticsTrackerService;
 import com.streaming.engine.notification.AudioEngineObserver;
 import com.streaming.engine.notification.PushNotificationService;
 import com.streaming.engine.notification.UploadManager;
+import com.streaming.engine.observer.AnalyticsEngine;
+import com.streaming.engine.observer.AudioObserver;
+import com.streaming.engine.observer.NotificationService;
+import com.streaming.engine.observer.ObservedPlaylist;
 import com.streaming.engine.playback.PlaybackEngine;
 import com.streaming.engine.playlist.Playlist;
 import com.streaming.engine.playlist.Song;
@@ -105,7 +109,15 @@ public class Main {
       
         System.out.println("--- Client issues standard playback command ---");
         player.playNativeTrack(nativeTrack);
-        
+
+        // Day 7
+        ObservedPlaylist dynamicPlaylist = new ObservedPlaylist("Siddhant Hits");
+        AudioObserver notificationService = new NotificationService();
+        AudioObserver analyticsEngine = new AnalyticsEngine();
+        dynamicPlaylist.subscribe(notificationService);
+        dynamicPlaylist.subscribe(analyticsEngine);
+        Song freshTrack = new Song(701, "Day 7 Breakthrough", "Siddhant", 220);
+        dynamicPlaylist.releaseNewTrack(freshTrack);
 
 
 
