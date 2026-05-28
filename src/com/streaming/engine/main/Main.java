@@ -1,5 +1,7 @@
 package com.streaming.engine.main;
 import java.util.*;
+import com.streaming.engine.strategy.RecommendationEngine1;
+import com.streaming.engine.strategy.Song1;
 import com.streaming.engine.playlist1.Playlist1;
 import com.streaming.engine.adapter.LegacySoundCloudService;
 import com.streaming.engine.adapter.NativeAudioPlayer;
@@ -19,6 +21,8 @@ import com.streaming.engine.playlist1.PlaylistFactory;
 import com.streaming.engine.recommendation.GenreBasedStrategy;
 import com.streaming.engine.recommendation.RecommendationEngine;
 import com.streaming.engine.recommendation.TopChartsStrategy;
+import com.streaming.engine.strategy.TrendingStrategy;
+import com.streaming.engine.strategy.WorkoutStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -118,6 +122,24 @@ public class Main {
         dynamicPlaylist.subscribe(analyticsEngine);
         Song freshTrack = new Song(701, "Day 7 Breakthrough", "Siddhant", 220);
         dynamicPlaylist.releaseNewTrack(freshTrack);
+
+        // Day 8 - Strategy Pattern
+        List<Song1> globalCatalog = new ArrayList<>();
+        globalCatalog.add(new Song1(1, "Gym Motivation Beat", "Artist A", 135, 12000));
+        globalCatalog.add(new Song1(2, "Midnight Lofi Chill", "Artist B", 72, 95000));
+        globalCatalog.add(new Song1(3, "Global Summer Smash", "Artist C", 124, 610000));
+        globalCatalog.add(new Song1(4, "Deep Focus Ambient", "Artist D", 60, 4000));
+
+        
+        RecommendationEngine1 engine2 = new RecommendationEngine1();
+
+        
+        engine2.setStrategy(new WorkoutStrategy());
+        engine2.generateUserFeed(globalCatalog);
+
+        
+       
+
 
 
 
